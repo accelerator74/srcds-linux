@@ -3,7 +3,7 @@ Preparing a Linux System (Ubuntu/Debian) for Left 4 Dead 2 Dedicated Server
 
 # Install required packages
 * `apt update && apt full-upgrade -y`
-* `apt install sudo screen vsftpd wget lib32gcc1 lib32stdc++6 lib32z1 python -y`
+* `apt install sudo screen vsftpd wget lib32gcc1 lib32stdc++6 lib32z1 python htop -y`
 
 # Remove old linux kernels
 * `apt-get purge $(dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | head -n -1)`
