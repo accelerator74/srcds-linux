@@ -7,6 +7,9 @@ Preparing a Linux System (Ubuntu/Debian) for Left 4 Dead 2 Dedicated Server
 
 # Remove old linux kernels
 * `apt-get purge $(dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | head -n -1)`
+
+# System cleanup
+* `journalctl --vacuum-size=1M`
 * `apt autoclean`
 * `apt --purge autoremove`
 
