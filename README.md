@@ -59,3 +59,10 @@ listen_ipv6=YES
 
 # Start server
 * `cd ~/l4d2_ds && ./start.sh`
+
+# Enable coredump
+* Add `ulimit -c unlimited` in `start.sh` before start screen session.
+
+# GDB debugging
+* `gdb ~/l4d2_ds/srcds_linux core`
+* `bt` (backtrace), `disassemble` (assembler code), `info registers` print info about registers
