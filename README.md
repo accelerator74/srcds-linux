@@ -3,7 +3,12 @@ Preparing a Linux System (Ubuntu/Debian) for Left 4 Dead 2 Dedicated Server
 
 # Install required packages
 * `apt update && apt full-upgrade -y`
-* `apt-get install screen vsftpd wget lib32gcc1 lib32stdc++6 lib32z1 python3 -y`
+* `apt install sudo screen vsftpd wget lib32gcc1 lib32stdc++6 lib32z1 python -y`
+
+# Remove old linux kernels
+* `apt-get purge $(dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | head -n -1)`
+* `apt autoclean`
+* `apt --purge autoremove`
 
 # Settings vsftpd
 * `systemctl stop vsftpd`
@@ -46,7 +51,7 @@ listen_ipv6=YES
 # Crontab
 * `crontab -e`
 * `@reboot sleep 10;cd /home/game/l4d2_ds/ && ./start.sh`
-* `* * * * * python3 watchdog.py 127.0.0.1:27015 L4D2_DS /home/game/l4d2_ds`
+* `* * * * * python watchdog.py 127.0.0.1:27015 L4D2_DS /home/game/l4d2_ds`
 * `30 06 * * * screen -S L4D2_DS -X quit; cd /home/game/l4d2_ds/ && ./start.sh`
 
 # Start server
