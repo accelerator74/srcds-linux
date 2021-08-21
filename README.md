@@ -55,7 +55,7 @@ listen_ipv6=YES
 # Crontab
 * `crontab -e`
 * `@reboot sleep 10;cd /home/game/l4d2_ds/ && ./start.sh`
-* `* * * * * python watchdog.py 127.0.0.1:27015 L4D2_DS /home/game/l4d2_ds`
+* `* * * * * python3 watchdog.py 127.0.0.1:27015 L4D2_DS /home/game/l4d2_ds`
 * `30 06 * * * screen -S L4D2_DS -X quit; cd /home/game/l4d2_ds/ && ./start.sh`
 
 # Start server
