@@ -67,3 +67,8 @@ listen_ipv6=YES
 # GDB debugging
 * `gdb ~/l4d2_ds/srcds_linux core`
 * `bt` (backtrace), `disassemble` (assembler code), `info registers` print info about registers
+
+# Performance
+* `nano /etc/default/grub`
+* `GRUB_CMDLINE_LINUX="mitigations=off"`
+* `update-grub`
