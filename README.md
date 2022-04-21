@@ -6,7 +6,8 @@ Preparing a Linux System (Ubuntu/Debian) for Left 4 Dead 2 Dedicated Server
 * `apt install sudo screen vsftpd wget lib32gcc-s1 lib32stdc++6 lib32z1 python3 htop -y`
 
 # Remove old linux kernels
-* `apt-get purge $(dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | head -n -1)`
+* `dpkg --list | grep linux-image`
+* `apt-get --purge remove linux-image-XXXX`
 
 # System cleanup
 * `journalctl --vacuum-size=1M`
@@ -57,6 +58,7 @@ listen_ipv6=YES
 * `@reboot sleep 10;cd /home/game/l4d2_ds/ && ./start.sh`
 * `* * * * * python3 watchdog.py 127.0.0.1:27015 L4D2_DS /home/game/l4d2_ds`
 * `30 02 * * * screen -S L4D2_DS -X quit; cd /home/game/l4d2_ds/ && ./start.sh`
+* `*/15 * * * * python3 demupload.py`
 
 # Start server
 * `cd ~/l4d2_ds && ./start.sh`

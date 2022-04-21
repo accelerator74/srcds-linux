@@ -4,7 +4,7 @@ import ftplib
 import zipfile
 import zlib
 
-demos_directory = '/home/game/l4d2_server/left4dead2'
+demos_directory = '/home/game/l4d2_ds/left4dead2'
 
 ftp_host = ''
 ftp_user = ''
