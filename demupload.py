@@ -9,7 +9,7 @@ demos_directory = '/home/game/l4d2_ds/left4dead2'
 ftp_host = ''
 ftp_user = ''
 ftp_pass = ''
-ftp_dir = '.'
+ftp_dir = 'l4d2_demos'
 
 dt = datetime.datetime.now()
 now = dt.timestamp()
