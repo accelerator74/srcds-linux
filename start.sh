@@ -1,2 +1,2 @@
 #!/bin/sh
-screen -A -m -d -L -S L4D2_DS ./run.sh
+screen -AdmSL L4D2_DS ./run.sh
