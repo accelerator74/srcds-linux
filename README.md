@@ -1,5 +1,5 @@
-# l4d2-ds
-Preparing a Linux System (Ubuntu/Debian) for Left 4 Dead 2 Dedicated Server
+# srcds
+Preparing a Linux System (Ubuntu/Debian) for Source Dedicated Server
 
 # Install required packages
 * `apt update && apt full-upgrade -y`
@@ -29,8 +29,8 @@ xferlog_file=/var/log/vsftpd.log
 chroot_list_enable=NO
 allow_writeable_chroot=YES
 local_umask=022
-pasv_min_port=49000
-pasv_max_port=55000
+pasv_min_port=10090
+pasv_max_port=10100
 listen_ipv6=YES
 ```
 * `systemctl enable vsftpd`
@@ -49,25 +49,25 @@ listen_ipv6=YES
 * `mkdir ~/steamcmd && cd ~/steamcmd`
 * `wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz`
 * `tar -xvzf steamcmd_linux.tar.gz`
-* `./l4d2_update.sh`
+* `./update.sh`
 * `cd ~/.steam && mkdir sdk32`
 * `ln -s ~/steamcmd/linux32/steamclient.so ~/.steam/sdk32/steamclient.so`
 
 # Crontab
 * `crontab -e`
-* `@reboot sleep 10;cd /home/game/l4d2_ds/ && ./start.sh`
-* `* * * * * python3 watchdog.py 127.0.0.1:27015 L4D2_DS /home/game/l4d2_ds`
-* `30 02 * * * screen -S L4D2_DS -X quit; cd /home/game/l4d2_ds/ && ./start.sh`
+* `@reboot sleep 10;cd /home/game/srcds/ && ./start.sh`
+* `* * * * * python3 watchdog.py 127.0.0.1:27015 SRCDS /home/game/srcds`
+* `30 02 * * * screen -S SRCDS -X quit; cd /home/game/srcds/ && ./start.sh`
 * `*/15 * * * * python3 demupload.py`
 
 # Start server
-* `cd ~/l4d2_ds && ./start.sh`
+* `cd ~/srcds && ./start.sh`
 
 # Enable coredump
 * Add `ulimit -c unlimited` in `start.sh` before start screen session.
 
 # GDB debugging
-* `gdb ~/l4d2_ds/srcds_linux core`
+* `gdb ~/srcds/srcds_linux core`
 * `bt` (backtrace), `disassemble` (assembler code), `info registers` print info about registers
 
 # Performance

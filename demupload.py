@@ -4,12 +4,12 @@ import ftplib
 import zipfile
 import zlib
 
-demos_directory = '/home/game/l4d2_ds/left4dead2'
+demos_directory = '/home/game/srcds/left4dead2'
 
 ftp_host = ''
 ftp_user = ''
 ftp_pass = ''
-ftp_dir = 'l4d2_demos'
+ftp_dir = 'demos'
 
 dt = datetime.datetime.now()
 now = dt.timestamp()

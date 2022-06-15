@@ -1,2 +1,2 @@
 #!/bin/sh
-screen -AdmSL L4D2_DS ./run.sh
+screen -AdmSL SRCDS ./run.sh
