@@ -18,7 +18,7 @@ def zipcompress():
     for filename in os.listdir(demos_directory):
         if filename.endswith('.dem'):
             filePath = os.path.join(demos_directory, filename)
-            if (now - os.path.getmtime(filePath) > 180):
+            if (now - os.path.getmtime(filePath) > 300):
                 zf = zipfile.ZipFile(filename + '.zip', 'w', zipfile.ZIP_DEFLATED)
                 zf.write(filePath, filename)
                 zf.close()
