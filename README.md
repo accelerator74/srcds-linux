@@ -74,3 +74,12 @@ listen_ipv6=YES
 * `nano /etc/default/grub`
 * `GRUB_CMDLINE_LINUX="mitigations=off"`
 * `update-grub`
+
+# Swap
+* `fallocate -l 512M /swapfile`
+* `chmod 600 /swapfile"`
+* `mkswap /swapfile`
+* `swapon /swapfile`
+* `echo '/swapfile none swap sw 0 0' | tee -a /etc/fstab`
+* `sysctl -w vm.swappiness=10`
+* `sysctl -w vm.vfs_cache_pressure=50`
