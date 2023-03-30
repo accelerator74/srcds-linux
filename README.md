@@ -30,7 +30,7 @@ chroot_list_enable=NO
 allow_writeable_chroot=YES
 local_umask=022
 pasv_min_port=10090
-pasv_max_port=10100
+pasv_max_port=10099
 listen_ipv6=YES
 ```
 * `systemctl enable vsftpd`
