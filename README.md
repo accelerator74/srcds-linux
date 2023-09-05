@@ -3,7 +3,7 @@ Preparing a Linux System (Ubuntu/Debian) for Source Dedicated Server
 
 # Install required packages
 * `apt update && apt full-upgrade -y`
-* `apt install sudo screen vsftpd wget lib32gcc-s1 lib32stdc++6 lib32z1 python3 htop -y`
+* `apt install sudo screen vsftpd wget lib32gcc-s1 lib32stdc++6 lib32z1 python3 htop psmisc -y`
 
 # Remove old linux kernels
 * `dpkg --list | grep linux-image`
@@ -77,7 +77,7 @@ listen_ipv6=YES
 
 # Swap
 * `fallocate -l 512M /swapfile`
-* `chmod 600 /swapfile"`
+* `chmod 600 /swapfile`
 * `mkswap /swapfile`
 * `swapon /swapfile`
 * `echo '/swapfile none swap sw 0 0' | tee -a /etc/fstab`
