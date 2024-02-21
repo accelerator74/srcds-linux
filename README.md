@@ -55,9 +55,9 @@ listen_ipv6=YES
 
 # Crontab
 * `crontab -e`
-* `@reboot sleep 10;cd /home/game/srcds/ && ./start.sh`
-* `* * * * * python3 watchdog.py 127.0.0.1:27015 SRCDS /home/game/srcds`
-* `30 02 * * * screen -S SRCDS -X quit; cd /home/game/srcds/ && ./start.sh`
+* `@reboot sleep 10;cd ~/srcds && ./start.sh`
+* `* * * * * python3 watchdog.py`
+* `30 02 * * * screen -S SRCDS -X quit; cd ~/srcds && ./start.sh`
 * `*/15 * * * * python3 demupload.py`
 
 # Start server
