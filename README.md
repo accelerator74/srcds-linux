@@ -13,6 +13,7 @@ Preparing a Linux System (Ubuntu/Debian) for Source Dedicated Server
 * `journalctl --vacuum-size=1M`
 * `apt autoclean`
 * `apt --purge autoremove`
+* `find /var/log \( -name "*.[0-9]" -o -name "*.*.[0-9]" -o -name "*.gz" \) -exec rm {} \;`
 
 # Settings vsftpd
 * `systemctl stop vsftpd`
