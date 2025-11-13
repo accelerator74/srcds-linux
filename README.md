@@ -49,10 +49,8 @@ listen_ipv6=YES
 # Download steamcmd & dedicated server
 * `mkdir ~/steamcmd && cd ~/steamcmd`
 * `wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz`
-* `tar -xvzf steamcmd_linux.tar.gz`
-* `./update.sh`
-* `cd ~/.steam && mkdir sdk32`
-* `ln -s ~/steamcmd/linux32/steamclient.so ~/.steam/sdk32/steamclient.so`
+* `./steamcmd.sh +force_install_dir ../srcds +login anonymous +app_update 222860 +quit`
+* `mkdir -p ~/.steam/sdk32 && ln -s ~/steamcmd/linux32/steamclient.so ~/.steam/sdk32/steamclient.so`
 
 # Crontab
 * `crontab -e`
