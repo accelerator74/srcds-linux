@@ -13,7 +13,7 @@ servers = [
         "server_adr": "127.0.0.1:27015",
         "server_dir": "~/srcds",
         "screen_name": "SRCDS",
-        "start_script": "start.sh",
+        "start_script": "",
         "game_dir": "left4dead2",
         "app_id": 222860,
         "auto_update": True
@@ -102,7 +102,7 @@ def check_server(server_config):
             os.system(f"screen -S {screen_name} -X quit")
             os.system(f"cd {steamcmd_dir} && ./steamcmd.sh +force_install_dir {server_dir} +login {steamcmd_login} +app_update {app_id} +quit")
             WaitForUpdate()
-            os.system(f"cd {server_dir} && ./{start_script}")
+            os.system(f"cd {server_dir}/{start_script} && ./start.sh")
             return
 
     ip, port = server_adr.split(":")
@@ -124,7 +124,7 @@ def check_server(server_config):
         file.write("[{}] {} server did not respond {} times\n".format(time.ctime(), server_adr, req))
         file.close()
         os.system(f"screen -S {screen_name} -X quit")
-        os.system(f"cd {server_dir} && ./{start_script}")
+        os.system(f"cd {server_dir}/{start_script} && ./start.sh")
 
 if __name__ == '__main__':
     for server in servers:
