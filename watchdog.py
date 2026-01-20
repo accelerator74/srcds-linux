@@ -54,6 +54,13 @@ def screen_exists(name):
     r = run(["screen", "-ls"])
     return f".{name}\t(" in r.stdout
 
+def steamcmd_running():
+    try:
+        result = run(["pgrep", "-f", "steamcmd"])
+        return result.returncode == 0 and result.stdout.strip() != ""
+    except:
+        return False
+
 def up_to_date_check(dir, subdir):
     appid = 0
     patch_version = 0
@@ -85,6 +92,13 @@ def up_to_date_check(dir, subdir):
         up_to_date = True
     return up_to_date
 
+def find_servers_for_update(target_dir):
+    dir_servers = []
+    for server in servers:
+        if server["server_dir"] == target_dir:
+            dir_servers.append(server)
+    return dir_servers
+
 def check_server(server_config):
     server_adr = server_config["server_adr"]
     screen_name = server_config["screen_name"]
@@ -94,9 +108,17 @@ def check_server(server_config):
         return
 
     if server_config["auto_update"]:
+        if steamcmd_running():
+            return
         if not up_to_date_check(server_config["server_dir"], server_config["game_dir"]):
-            log_message(f"{server_adr} server restarted for update")
-            run(["screen", "-S", screen_name, "-X", "quit"])
+            upd_servers = find_servers_for_update(server_config["server_dir"])
+            for server in upd_servers:
+                server_adr = server["server_adr"]
+                screen_name = server["screen_name"]
+                if screen_exists(screen_name):
+                    log_message(f"{server_adr} server stopped for update")
+                    run(["screen", "-S", screen_name, "-X", "quit"])
+            time.sleep(3)
             run([
                     str(steamcmd_dir / "steamcmd.sh"),
                     "+force_install_dir", str(server_config["server_dir"]),
@@ -104,17 +126,16 @@ def check_server(server_config):
                     "+app_update", str(server_config["app_id"]),
                     "+quit"
                 ], timeout=600)
-            run(
-                ["./start.sh"],
-                timeout=15,
-                cwd=start_path
-            )
+            for server in upd_servers:
+                start_path = server["server_dir"] / server["start_dir"]
+                run(["./start.sh"], timeout=15, cwd=start_path)
+                time.sleep(3)
             return
 
     ip, port = server_adr.split(":")
     result = False
 
-    for attempt in range(5):
+    for _ in range(5):
         result = socket_query(ip, int(port))
         if result:
             break
