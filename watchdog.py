@@ -141,7 +141,7 @@ def check_server(server_config):
             break
         if not screen_exists(screen_name):
             return
-        time.sleep(3)
+        time.sleep(10)
 
     if not result:
         log_message(f"{server_adr} server did not respond 5 times")
