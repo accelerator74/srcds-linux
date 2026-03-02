@@ -31,14 +31,21 @@ def log_message(message):
         log.write(f"[{time.ctime()}] {message}\n")
 
 def socket_query(ip, port):
+    response = None
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.settimeout(5)
     try:
-        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-            s.settimeout(3)
-            s.sendto(b'\xFF\xFF\xFF\xFFTSource Engine Query\0', (ip, port))
-            data = s.recv(1024)
-            return len(data) > 0
+        s.connect((ip, port))
     except:
-        return False
+        response = None
+    else:
+        s.send(b'\xFF\xFF\xFF\xFFTSource Engine Query\0')
+    try:
+        response = s.recv(1024)
+    except socket.error:
+        response = None
+    s.close()
+    return response
 
 def run(cmd, timeout=5, cwd=None):
     return subprocess.run(
@@ -133,18 +140,19 @@ def check_server(server_config):
             return
 
     ip, port = server_adr.split(":")
-    result = False
+    port = int(port)
+    result = None
 
-    for _ in range(5):
-        result = socket_query(ip, int(port))
-        if result:
+    for attempt in range(1, 6):
+        result = socket_query(ip, port)
+        if result is not None:
             break
         if not screen_exists(screen_name):
             return
         time.sleep(10)
 
-    if not result:
-        log_message(f"{server_adr} server did not respond 5 times")
+    if result is None:
+        log_message(f"{server_adr} server did not respond after {attempt} times")
         run(["screen", "-S", screen_name, "-X", "quit"])
         run(
             ["./start.sh"],
