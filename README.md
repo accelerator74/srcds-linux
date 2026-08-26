@@ -71,7 +71,7 @@ listen_ipv6=YES
 
 # Performance
 * `nano /etc/default/grub`
-* `GRUB_CMDLINE_LINUX="mitigations=off"`
+* `GRUB_CMDLINE_LINUX="mitigations=off isolcpus=1,2,3 rcu_nocbs=1,2,3 nohz_full=1,2,3 irqaffinity=0"`
 * `update-grub`
 
 # Swap
