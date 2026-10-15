@@ -49,6 +49,7 @@ listen_ipv6=YES
 # Download steamcmd & dedicated server
 * `mkdir ~/steamcmd && cd ~/steamcmd`
 * `wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz`
+* `tar -xvzf steamcmd_linux.tar.gz`
 * `./steamcmd.sh +force_install_dir ../srcds +login anonymous +app_update 222860 +quit`
 * `mkdir -p ~/.steam/sdk32 && ln -s ~/steamcmd/linux32/steamclient.so ~/.steam/sdk32/steamclient.so`
 
@@ -67,7 +68,7 @@ listen_ipv6=YES
 
 # GDB debugging
 * `gdb ~/srcds/srcds_linux core`
-* `bt` (backtrace), `disassemble` (assembler code), `info registers` print info about registers
+* `bt` (backtrace), `disassemble` (assembler code), `info all-registers` print info about registers
 
 # Performance
 * `nano /etc/default/grub`
